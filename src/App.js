@@ -2,32 +2,36 @@ import React, {Component} from "react";
 import "./App.css";
 
 // ***Import Components***
-import UserInput from "./UserInput/UserInput";
-import UserOutput from "./UserOutput/UserOutput";
-
+import Dynamo from "./Dynamo/Dynamo";
 
 class App extends Component {
+
     state = {
-        userName: "Anonymous"
+        makeList: false
     };
 
-    onUserNameClick = event => {
-        this.setState({
-            userName: event.target.value
-        });
+    onMakeList = () => {
+        const myList = this.state.makeList;
+
+        this.setState({makeList: !myList});
     };
 
     render() {
-        const style = {
-            color: "red"
-        };
+
         return (
             <div>
-                <UserInput changed={this.onUserNameClick} currentName={this.state.userName}/>
-                <UserOutput userName={"Armin"}/>
-                <UserOutput style={style} userName={this.state.userName}/>
-                <UserOutput style={style} userName={this.state.userName}/>
-                <UserOutput changeUserName={this.onUserNameClick}/>
+                <Dynamo/>
+                <button onClick={this.onMakeList}>{this.state.makeList ? "Hide" : "Show"} List</button>
+
+                {this.state.makeList ?
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                        <li>Item 4</li>
+                    </ul>
+                    : null
+                }
             </div>
         );
     }
