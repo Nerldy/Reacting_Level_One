@@ -8,7 +8,7 @@ import UserOutput from "./UserOutput/UserOutput";
 
 class App extends Component {
     state = {
-        userName: "Default Name"
+        userName: "Anonymous"
     };
 
     onUserNameClick = event => {
@@ -23,8 +23,9 @@ class App extends Component {
         };
         return (
             <div>
-                <UserInput changed={this.onUserNameClick}/>
+                <UserInput changed={this.onUserNameClick} currentName={this.state.userName}/>
                 <UserOutput userName={"Armin"}/>
+                <UserOutput style={style} userName={this.state.userName}/>
                 <UserOutput style={style} userName={this.state.userName}/>
                 <UserOutput changeUserName={this.onUserNameClick}/>
             </div>
