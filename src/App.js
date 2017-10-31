@@ -18,20 +18,26 @@ class App extends Component {
 
     render() {
 
+        let createList = null;
+
+        if (this.state.makeList) {
+            createList = (
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                    <li>Item 4</li>
+                </ul>
+            );
+        }
+
+
         return (
             <div>
                 <Dynamo/>
                 <button onClick={this.onMakeList}>{this.state.makeList ? "Hide" : "Show"} List</button>
 
-                {this.state.makeList ?
-                    <ul>
-                        <li>Item 1</li>
-                        <li>Item 2</li>
-                        <li>Item 3</li>
-                        <li>Item 4</li>
-                    </ul>
-                    : null
-                }
+                {createList}
             </div>
         );
     }
