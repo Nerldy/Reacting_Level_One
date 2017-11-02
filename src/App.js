@@ -2,45 +2,30 @@ import React, {Component} from "react";
 import "./App.css";
 
 // ***Import Components***
-import Dynamo from "./Dynamo/Dynamo";
+import Person from "./Person/Person";
+
+const Katoi = () => {
+    return (
+        <section className={'Katoi'}>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quas suscipit tempore. Eos itaque maxime modi molestiae nam porro quo quod reprehenderit ut. Quae, quia?</p>
+        </section>
+    );
+};
 
 class App extends Component {
-
-    state = {
-        makeList: false
-    };
-
-    onMakeList = () => {
-        const myList = this.state.makeList;
-
-        this.setState({makeList: !myList});
-    };
-
     render() {
-
-        let createList = null;
-
-        if (this.state.makeList) {
-            createList = (
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                    <li>Item 4</li>
-                </ul>
-            );
-        }
-
-
+        let appName = "DORMS";
         return (
             <div>
-                <Dynamo/>
-                <button onClick={this.onMakeList}>{this.state.makeList ? "Hide" : "Show"} List</button>
-
-                {createList}
+                <Person _id={4586} sect={"Mulwa"}/>
+                <Person _id={5214} sect={"Limbung'a"}/>
+                <Person _id={8756} sect={"Shirikwa"}>
+                    <Katoi/>
+                </Person>
             </div>
         );
     }
+
 }
 
 export default App;
