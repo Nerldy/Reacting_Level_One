@@ -6,20 +6,48 @@ import Person from "./Person/Person";
 
 const Katoi = () => {
     return (
-        <section className={'Katoi'}>
+        <section className={"Katoi"}>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quas suscipit tempore. Eos itaque maxime modi molestiae nam porro quo quod reprehenderit ut. Quae, quia?</p>
         </section>
     );
 };
 
 class App extends Component {
+    state = {
+        dorms: [
+            {_id: 4586, sect: "Mulwa"},
+            {_id: 4258, sect: "Limboeno"},
+            {_id: 7856, sect: "Shirikwa"}
+        ]
+    };
+
+    onSwitchDorms = dm => {
+        this.setState({
+            dorms: [
+                {_id: 4586, sect: dm},
+                {_id: 4258, sect: "Muroo"},
+                {_id: 7856, sect: "Shirikwa"}
+            ]
+        });
+    };
+
+    twowayBinding = e => {
+        this.setState({
+            dorms: [
+                {_id: 4586, sect: "Mulwa"},
+                {_id: 4258, sect: e.target.value},
+                {_id: 7856, sect: "Shirikwa"}
+            ]
+        });
+    };
+
     render() {
-        let appName = "DORMS";
         return (
             <div>
-                <Person _id={4586} sect={"Mulwa"}/>
-                <Person _id={5214} sect={"Limbung'a"}/>
-                <Person _id={8756} sect={"Shirikwa"}>
+                <button onClick={() => this.onSwitchDorms("Uloa")}>Switch Dorm</button>
+                <Person _id={this.state.dorms[0]._id} sect={this.state.dorms[0].sect} twoway={this.twowayBinding}/>
+                <Person _id={this.state.dorms[1]._id} sect={this.state.dorms[1].sect} clicked={this.onSwitchDorms.bind(this, "Tey-tey")}/>
+                <Person _id={this.state.dorms[2]._id} sect={this.state.dorms[2].sect}>
                     <Katoi/>
                 </Person>
             </div>

@@ -5,8 +5,10 @@ const person = props => {
     return (
         <header className={"Person"}>
             <h3>ID: {props._id}</h3>
-            <p><strong>Sect: <em>{props.sect}</em></strong></p>
+            <p onClick={props.clicked}><strong>Sect: <em>{props.sect}</em></strong></p>
             {props.children}
+
+            <input type="text" onChange={props.twoway}/>
         </header>
     );
 };
