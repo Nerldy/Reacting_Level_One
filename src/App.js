@@ -23,11 +23,12 @@ class App extends Component {
 
     onSwitchDorms = dm => {
         this.setState({
-            dorms: [
+            dorms   : [
                 {_id: 4586, sect: dm},
                 {_id: 4258, sect: "Muroo"},
                 {_id: 7856, sect: "Shirikwa"}
-            ]
+            ],
+            toggling: false
         });
     };
 
@@ -41,15 +42,33 @@ class App extends Component {
         });
     };
 
+    toggle = () => {
+        const switcher = this.state.toggling;
+        this.setState({
+            toggling: !switcher
+        });
+    };
+
     render() {
+
+        let people = null;
+
+        if (this.state.toggling) {
+            people = (
+                <div>
+
+                    <Person _id={this.state.dorms[0]._id} sect={this.state.dorms[0].sect} twoway={this.twowayBinding}/>
+                    <Person _id={this.state.dorms[1]._id} sect={this.state.dorms[1].sect} clicked={this.onSwitchDorms.bind(this, "Tey-tey")}/>
+                    <Person _id={this.state.dorms[2]._id} sect={this.state.dorms[2].sect}>
+                        <Katoi/>
+                    </Person>
+                </div>
+            );
+        }
         return (
             <div>
-                <button onClick={() => this.onSwitchDorms("Uloa")}>Switch Dorm</button>
-                <Person _id={this.state.dorms[0]._id} sect={this.state.dorms[0].sect} twoway={this.twowayBinding}/>
-                <Person _id={this.state.dorms[1]._id} sect={this.state.dorms[1].sect} clicked={this.onSwitchDorms.bind(this, "Tey-tey")}/>
-                <Person _id={this.state.dorms[2]._id} sect={this.state.dorms[2].sect}>
-                    <Katoi/>
-                </Person>
+                <button onClick={this.toggle}>Show</button>
+                {people}
             </div>
         );
     }
