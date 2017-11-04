@@ -21,25 +21,11 @@ class App extends Component {
         ]
     };
 
-    onSwitchDorms = dm => {
-        this.setState({
-            dorms   : [
-                {_id: 4586, sect: dm},
-                {_id: 4258, sect: "Muroo"},
-                {_id: 7856, sect: "Shirikwa"}
-            ],
-            toggling: false
-        });
-    };
 
-    twowayBinding = e => {
-        this.setState({
-            dorms: [
-                {_id: 4586, sect: "Mulwa"},
-                {_id: 4258, sect: e.target.value},
-                {_id: 7856, sect: "Shirikwa"}
-            ]
-        });
+    deleteDorm = index => {
+        const dorm = [...this.state.dorms];
+        dorm.splice(index, 1);
+        this.setState({dorms: dorm});
     };
 
     toggle = () => {
@@ -56,12 +42,9 @@ class App extends Component {
         if (this.state.toggling) {
             people = (
                 <div>
-
-                    <Person _id={this.state.dorms[0]._id} sect={this.state.dorms[0].sect} twoway={this.twowayBinding}/>
-                    <Person _id={this.state.dorms[1]._id} sect={this.state.dorms[1].sect} clicked={this.onSwitchDorms.bind(this, "Tey-tey")}/>
-                    <Person _id={this.state.dorms[2]._id} sect={this.state.dorms[2].sect}>
-                        <Katoi/>
-                    </Person>
+                    {this.state.dorms.map((list, index) => {
+                        return <Person deletePeep={() => this.deleteDorm(index)} _id={list._id} sect={list.sect} key={list._id}/>;
+                    })}
                 </div>
             );
         }
